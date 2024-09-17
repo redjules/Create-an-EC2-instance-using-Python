@@ -14,13 +14,13 @@ subnet_id = 'subnet-b40f1df9'
 response = ec2.run_instance(ImageId=image_id, iNstanceType=instance_type, KeyName=key_name, MaxCount=1)
 
 
-#Get instance ID from response
+# Get instance ID from response
 instance_id = response['Instances'][0]['InstanceID']
 
-#Wait for instance to be running
+# Wait for instance to be running
 ec2.get_waiter('instance_running').wait(InstanceIds=[instance_id])
 
-#Print instance information
+# Print instance information
 instance =ec2.describe_instance(InstanceIds=[instance_id])['Reservations'][0]['Instances'][0]
 print(f"Instance ID: {instance_id}")
 print(f"Public IP address: {instance.get('PublicIpaAddress', 'N/A')}")
